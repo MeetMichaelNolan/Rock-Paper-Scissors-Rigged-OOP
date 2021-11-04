@@ -1,0 +1,84 @@
+import random
+import time
+
+
+class Rock:
+
+    def __init__(self):
+        self.computer_wins = 0
+        self.user_wins = 0
+        self.choices = ['rock', 'paper', 'scissors']
+
+    def intro(self):
+        print("Welcome to Rock, Paper, Scissors! A game by Michael Nolan.")
+        time.sleep(1)
+        print("Enter either rock, paper or scissors and the computer will play against you.")
+        time.sleep(1)
+        print("Beat the computer 5 times to win the match or type in 'quit' to stop playing.\nEnter a value:")
+        time.sleep(1)
+
+    def play(self):
+
+        self.intro()
+
+        while True:
+            b = random.randint(0, 2)
+            x = input().lower()
+            y = self.choices[b]
+
+            if x == 'quit':
+                print("That is enough fun for now.")
+                time.sleep(1)
+                break
+
+            elif x not in self.choices:
+                print("Invalid entry, try again.")
+                continue
+
+            elif self.computer_wins > 4:
+                print('A participant has won 5 games...')
+                time.sleep(2.5)
+                print('And the winer is...')
+                time.sleep(2.5)
+                print('COMPUTER!')
+                break
+
+            elif self.user_wins > 4:
+                print('A participant has won 5 games...')
+                time.sleep(2.5)
+                print('And the winer is...')
+                time.sleep(2.5)
+                print('USER!!!')
+                break
+
+            elif x == 'rock':
+                print('Computer: paper')
+                time.sleep(0.5)
+                print('You have lost.')
+                self.computer_wins += 1
+
+            elif x == 'paper':
+                print('Computer: scissors')
+                time.sleep(0.5)
+                print('You have lost.')
+                self.computer_wins += 1
+
+            elif x == 'scissors':
+                print('Computer: rock')
+                time.sleep(0.5)
+                print('You have lost.')
+                self.computer_wins += 1
+
+        self.ending()
+
+    def ending(self):
+
+        if self.computer_wins > self.user_wins:
+            print(f"The computer has defeated you, winning {self.computer_wins} games to your {self.user_wins} games.")
+        elif self.computer_wins < self.user_wins:
+            print(f"You have defeated the all mighty Computer!\nIn your route to victory, you won {self.user_wins} games to the computers {self.computer_wins}.")
+        else:
+            print(f"Yall both tied with {self.user_wins} wins each.")
+
+play = Rock()
+play.play()
